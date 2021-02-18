@@ -1,0 +1,63 @@
+/*--- Text ---*/
+@mixin font-style($font-weight: normal, $font-size: 16px) {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: $font-weight;
+  font-size: $font-size;
+}
+
+@mixin main-title($margin-bottom: 30px) {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  text-transform: capitalize;
+  color: $dark-blue;
+  margin-bottom: $margin-bottom;
+}
+
+/*--- Buttons ---*/
+@mixin button() {
+  background-color: $light-blue;
+  border: 2px solid $light-blue;
+  box-sizing: border-box;
+  box-shadow: $grey-shadow;
+  border-radius: 5px;
+  width: 132px;
+  height: 31px;
+  @include font-style(600, 14px);
+  line-height: 1.25;
+  letter-spacing: 0.015em;
+  color: $light;
+  cursor: pointer;
+  transition-duration: 300ms;
+
+  &:hover {
+    background-color: $medium-blue;
+    border: 2px solid $medium-blue;
+  }
+}
+
+@mixin button_light() {
+  background-color: $light;
+  border: 2px solid $light-blue;
+  box-sizing: border-box;
+  box-shadow: $grey-shadow;
+  border-radius: 5px;
+  width: 132px;
+  height: 31px;
+  @include font-style(600, 14px);
+  line-height: 1.25;
+  letter-spacing: 0.015em;
+  color: $light-blue;
+  cursor: pointer;
+  transition-duration: 300ms;
+
+  &:hover {
+    background-color: $medium-blue;
+    border: 2px solid $medium-blue;
+    color: $light;
+  }
+}

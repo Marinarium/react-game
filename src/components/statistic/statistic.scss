@@ -22,7 +22,7 @@
   color: $dark-blue;
   text-align: left;
 
-  th{
+  th {
     padding-bottom: 40px;
     padding-right: 70px;
     @media (max-width: 670px) {
@@ -30,7 +30,7 @@
     }
   }
 
-  tr td{
+  tr td {
     padding-bottom: 25px;
     padding-right: 90px;
     color: $dark;
