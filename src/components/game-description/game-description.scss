@@ -1,0 +1,129 @@
+@import '../../assets/styles/main.scss';
+
+.game-desc{
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  padding: 0 5%;
+
+  @media (min-width: 1600px) {
+    padding-left: 18%;
+    padding-right: 18%;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.game-desc__frame {
+  margin-right: 60px;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.game-desc__img {
+  width: 265px;
+  height: 265px;
+  object-fit: contain;
+  object-position: top;
+
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.game-desc__title {
+  @include main-title();
+}
+
+.game-desc__text {
+  @include font-style(normal, 14px);
+  line-height: 1.5;
+  color: $dark;
+  max-width: 400px;
+  margin-bottom: 25px;
+}
+
+.config__row {
+  margin-bottom: 15px;
+}
+
+.config__title {
+  @include font-style(500, 20px);
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  text-transform: capitalize;
+  color: $dark-blue;
+  margin-bottom: 20px;
+}
+
+.config__box {
+  margin-bottom: 30px;
+}
+
+.config__subtitle {
+  display: inline-block;
+  @include font-style(500);
+  line-height: 1.25;
+  color: $dark;
+  margin-right: 8px;
+}
+
+.config__options {
+  display: inline-block;
+  @include font-style(normal);
+  line-height: 1.25;
+  color: $grey;
+}
+
+.config__option {
+  cursor: pointer;
+  &.active {
+    color: $light-blue;
+    font-weight: 500;
+  }
+}
+
+.config__level {
+  display: inline-block;
+  font-weight: normal;
+  font-size: 14px;
+  color: $dark;
+  margin: 0 8px;
+}
+
+.config__btn {
+  background: $light-blue;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 3px;
+  @include font-style(500, 14px);
+  line-height: 1.25px;
+  color: $light;
+  cursor: pointer;
+  transition-duration: 300ms;
+
+  &:hover {
+    background-color: $medium-blue;
+  }
+
+  &_disabled {
+    background-color: $grey;
+    &:hover {
+      background-color: $grey;
+    }
+  }
+}
+
+.config__btn-start {
+  @include button();
+}
