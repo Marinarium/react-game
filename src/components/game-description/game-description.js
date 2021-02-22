@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import './game-description.scss';
 import cover from './images/cover.svg'
 
+import {Link} from 'react-router-dom'
+
 export default class GameDescription extends Component {
     render() {
         return (
@@ -35,7 +37,7 @@ export default class GameDescription extends Component {
                                 <div className="config__options"><span className="config__option limit_yes active">Yes</span> / <span className="config__option limit_no">No</span></div>
                             </div>
                         </div>
-                        <button className="button config__btn-start">Start</button>
+                        <Link to="/game" className="button config__btn-start">Start</Link>
                     </section>
                 </div>
             </section>
