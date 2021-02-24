@@ -4,24 +4,22 @@ import './card.scss';
 
 export default class Card extends Component {
 
+    state = {
+        selected: ''
+    };
+
+    selectCard = () =>  {
+        this.state.selected === '' ? this.setState({selected: 'selected'}) : this.setState({selected: ''});
+    };
+
     render() {
+        const {className, name, style} = this.props;
+        const {selected} = this.state;
 
-        const cards = this.props.cards;
-        const twoPacksOfCards = [...cards, ...cards];
-        let i = 0;
-
-        const allCards = twoPacksOfCards.map(({name, img}) => {
-            return (
-                <div className="card"
-                     key={i++}
-                     style={{backgroundImage: `url(${img})`}}>
-                </div>
-            );
-        });
-
-        return(
-            <div>
-               {allCards}
+        return (
+            <div className={`${className} ${selected}`}
+                 style={style}
+                 onClick={this.selectCard}>
             </div>
         )
     }

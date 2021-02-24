@@ -8,7 +8,7 @@ export default class Header extends Component {
 
     state = {
         menu: ''
-    }
+    };
 
     menuItems = [
         {name: 'Home', linkTo: '/'},
