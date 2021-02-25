@@ -21,4 +21,7 @@
 
 .selected {
   background-color: lightgreen;
+  &:hover {
+    background-color: #9ff69f;
+  }
 }

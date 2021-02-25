@@ -4,22 +4,21 @@ import './card.scss';
 
 export default class Card extends Component {
 
-    state = {
-        selected: ''
-    };
-
-    selectCard = () =>  {
-        this.state.selected === '' ? this.setState({selected: 'selected'}) : this.setState({selected: ''});
-    };
-
     render() {
-        const {className, name, style} = this.props;
-        const {selected} = this.state;
+        const {style, onCountClick, onSelectCard, selected} = this.props;
+
+        let classNames = 'card';
+        if (selected) {
+            classNames += ' selected';
+        }
 
         return (
-            <div className={`${className} ${selected}`}
+            <div className={classNames}
                  style={style}
-                 onClick={this.selectCard}>
+                 onClick={(e) => {
+                     onCountClick();
+                     onSelectCard();
+                 }}>
             </div>
         )
     }

@@ -5,18 +5,26 @@ import './game.scss';
 
 export default class Game extends Component {
 
+    // state = {
+    //     count: 0
+    // };
+    //
+    // countClick = () => {
+    //     this.setState({ count: this.state.count + 1 })
+    //     console.log(this.state.count);
+    // }
+
     render() {
-        const {cards} = this.props;
+        const {cards, onCountClick, onSelectCard} = this.props;
 
-        const twoPacksOfCards = [...cards, ...cards];
-        let i = 0;
-
-        const allCards = twoPacksOfCards.map(({name, img}) => {
+        const allCards = cards.map((item) => {
+            const {id, img, ...itemProps} = item;
             return (
-                <Card className={`card`}
-                      key={i++}
-                      name={name}
-                      style={{backgroundImage: `url(${img})`}}/>
+                <Card {...itemProps}
+                      key={id}
+                      style={{backgroundImage: `url(${img})`}}
+                      onSelectCard={() => onSelectCard(id)}
+                      onCountClick={() => onCountClick()}/>
             );
         });
 

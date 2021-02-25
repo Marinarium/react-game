@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 export default class Header extends Component {
 
     state = {
-        menu: ''
+        menu: false
     };
 
     menuItems = [
@@ -18,8 +18,12 @@ export default class Header extends Component {
     ];
 
     showMenu = () => {
-        document.getElementById('body').classList.toggle('overflow-hidden');
-        this.state.menu === '' ? this.setState({menu: 'active'}) : this.setState({menu: ''});
+        document.body.classList.toggle('overflow-hidden');
+        this.setState((state) => {
+            return {
+                menu: !state.menu
+            };
+        });
     };
 
     render() {
@@ -37,11 +41,20 @@ export default class Header extends Component {
             );
         });
 
+        const {menu} = this.state;
+
+        let classBurger = 'burger';
+        let classMenuList = 'menu__list'
+        if (menu) {
+            classBurger += ' active';
+            classMenuList += ' active'
+        }
+
         return (
             <header className='header'>
                 <h1 className='logo'><Link to="/" className="logo__link">MemoryGame</Link></h1>
                 <nav className='menu'>
-                    <div className={`burger ${this.state.menu}`}
+                    <div className={classBurger}
                          id="burger"
                          onClick={this.showMenu}>
                         <span></span>
@@ -49,7 +62,7 @@ export default class Header extends Component {
                         <span></span>
                         <span></span>
                     </div>
-                    <ul className={`menu__list ${this.state.menu}`}>
+                    <ul className={classMenuList}>
                         {menuItems}
                     </ul>
                 </nav>
