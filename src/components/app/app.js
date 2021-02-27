@@ -49,35 +49,73 @@ export default class App extends Component {
             name: name,
             img: img,
             selected: false,
+            firstGuess: false,
+            secondGuess: false,
             id: this.someId++
         }
     }
 
-    onCountClick = () => {
-        // this.setState({count: this.state.count + 1})
-        console.log(this.state.count);
+    changeProperty(arr, id, propName, newProp) {
+        const indexOfCard = arr.findIndex((el) => el.id === id);
+
+        const oldItem = arr[indexOfCard];
+        const newItem = {...oldItem, [propName]: newProp};
+
+        return [
+            ...arr.slice(0, indexOfCard),
+            newItem,
+            ...arr.slice(indexOfCard + 1),
+        ];
+    }
+
+    incrementCount() {
+        this.setState((state) => {
+            return {count: state.count + 1}
+        });
+    }
+
+    zeroOutCount() {
+        this.setState((state) => {
+            return {count: 0}
+        });
+    }
+
+    resetGuesses() {
+        this.zeroOutCount();
+    }
+
+    onCountClick = (id) => {
+        // this.setState((state) => {
+        //     return {count: state.count + 1}
+        // });
+        //
     };
 
-    onSelectCard = (id) => {
-        this.setState(({cardsData}) => {
-            const indexOfCard = cardsData.findIndex((el) => el.id === id);
+    onSelectCard = (id, name, firstGuess) => {
+        if (this.state.count < 2) {
+            if (this.state.count === 0) {
+                this.incrementCount();
+                this.setState(({cardsData}) => {
+                    return {
+                        cardsData: this.changeProperty(cardsData, id, 'firstGuess', name)
+                    };
+                });
+            }
+            if (this.state.count === 1 && !firstGuess) {
+                this.incrementCount();
+                this.setState(({cardsData}) => {
+                    return {
+                        cardsData: this.changeProperty(cardsData, id, 'secondGuess', name)
+                    };
+                });
+            }
 
-            // 1. update object
-            const oldItem = cardsData[indexOfCard];
-            const newItem = {...oldItem, selected: true};
-
-            // 2. construct new array
-            const newArray = [
-                ...cardsData.slice(0, indexOfCard),
-                newItem,
-                ...cardsData.slice(indexOfCard + 1),
-            ];
-
-            return {
-                cardsData: newArray
-            };
-        });
-        console.log('select', id);
+            this.setState(({cardsData}) => {
+                return {
+                    cardsData: this.changeProperty(cardsData, id, 'selected', true)
+                };
+            });
+        }
     };
 
     render() {

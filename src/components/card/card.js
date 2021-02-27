@@ -5,11 +5,14 @@ import './card.scss';
 export default class Card extends Component {
 
     render() {
-        const {style, onCountClick, onSelectCard, selected} = this.props;
+        const {style, onCountClick, onSelectCard, selected, counter, matcher} = this.props;
 
         let classNames = 'card';
         if (selected) {
             classNames += ' selected';
+        }
+        if (matcher && selected) {
+            classNames += ' match';
         }
 
         return (

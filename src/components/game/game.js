@@ -17,14 +17,30 @@ export default class Game extends Component {
     render() {
         const {cards, onCountClick, onSelectCard} = this.props;
 
+        const firstGuessElem = cards.filter((el) => el.firstGuess);
+        const secondGuessElem = cards.filter((el) => el.secondGuess);
+        let matcher = false;
+
+        if (firstGuessElem[0] && secondGuessElem[0]) {
+            if (firstGuessElem[0].name === secondGuessElem[0].name
+                && firstGuessElem[0].id !== secondGuessElem[0].id) {
+                matcher = true;
+            }
+
+            if(firstGuessElem[0].id === secondGuessElem[0].id) {
+                console.log('no', this.props.counter )
+            }
+        }
+
         const allCards = cards.map((item) => {
-            const {id, img, ...itemProps} = item;
+            const {id, img, name, firstGuess, ...itemProps} = item;
             return (
                 <Card {...itemProps}
+                      matcher={matcher}
                       key={id}
                       style={{backgroundImage: `url(${img})`}}
-                      onSelectCard={() => onSelectCard(id)}
-                      onCountClick={() => onCountClick()}/>
+                      onSelectCard={() => onSelectCard(id, name, firstGuess)}
+                      onCountClick={() => onCountClick(id)}/>
             );
         });
 
