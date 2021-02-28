@@ -51,6 +51,7 @@ export default class App extends Component {
             selected: false,
             firstGuess: false,
             secondGuess: false,
+            match: false,
             id: this.someId++
         }
     }
@@ -80,21 +81,21 @@ export default class App extends Component {
         });
     }
 
-    resetGuesses() {
-        this.zeroOutCount();
-    }
-
     onCountClick = (id) => {
         // this.setState((state) => {
         //     return {count: state.count + 1}
         // });
-        //
     };
 
     onSelectCard = (id, name, firstGuess) => {
         if (this.state.count < 2) {
             if (this.state.count === 0) {
                 this.incrementCount();
+                this.setState(({cardsData}) => {
+                    return {
+                        cardsData: this.changeProperty(cardsData, id, 'selected', true)
+                    };
+                });
                 this.setState(({cardsData}) => {
                     return {
                         cardsData: this.changeProperty(cardsData, id, 'firstGuess', name)
@@ -105,16 +106,16 @@ export default class App extends Component {
                 this.incrementCount();
                 this.setState(({cardsData}) => {
                     return {
+                        cardsData: this.changeProperty(cardsData, id, 'selected', true)
+                    };
+                });
+                this.setState(({cardsData}) => {
+                    return {
                         cardsData: this.changeProperty(cardsData, id, 'secondGuess', name)
                     };
                 });
+                this.zeroOutCount();
             }
-
-            this.setState(({cardsData}) => {
-                return {
-                    cardsData: this.changeProperty(cardsData, id, 'selected', true)
-                };
-            });
         }
     };
 

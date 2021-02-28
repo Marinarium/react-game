@@ -19,16 +19,19 @@ export default class Game extends Component {
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
         const secondGuessElem = cards.filter((el) => el.secondGuess);
-        let matcher = false;
 
         if (firstGuessElem[0] && secondGuessElem[0]) {
             if (firstGuessElem[0].name === secondGuessElem[0].name
                 && firstGuessElem[0].id !== secondGuessElem[0].id) {
-                matcher = true;
-            }
-
-            if(firstGuessElem[0].id === secondGuessElem[0].id) {
-                console.log('no', this.props.counter )
+                firstGuessElem[0].match = true;
+                secondGuessElem[0].match = true;
+                firstGuessElem[0].firstGuess = false;
+                secondGuessElem[0].secondGuess = false;
+            } else {
+                firstGuessElem[0].firstGuess = false;
+                secondGuessElem[0].secondGuess = false;
+                firstGuessElem[0].selected = false;
+                secondGuessElem[0].selected = false;
             }
         }
 
@@ -36,7 +39,6 @@ export default class Game extends Component {
             const {id, img, name, firstGuess, ...itemProps} = item;
             return (
                 <Card {...itemProps}
-                      matcher={matcher}
                       key={id}
                       style={{backgroundImage: `url(${img})`}}
                       onSelectCard={() => onSelectCard(id, name, firstGuess)}
