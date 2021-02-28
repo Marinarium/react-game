@@ -5,16 +5,7 @@ import './game.scss';
 
 export default class Game extends Component {
 
-    // state = {
-    //     count: 0
-    // };
-    //
-    // countClick = () => {
-    //     this.setState({ count: this.state.count + 1 })
-    //     console.log(this.state.count);
-    // }
-
-    render() {
+       render() {
         const {cards, onCountClick, onSelectCard} = this.props;
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
@@ -27,7 +18,8 @@ export default class Game extends Component {
                 secondGuessElem[0].match = true;
                 firstGuessElem[0].firstGuess = false;
                 secondGuessElem[0].secondGuess = false;
-            } else {
+            }
+            else {
                 firstGuessElem[0].firstGuess = false;
                 secondGuessElem[0].secondGuess = false;
                 firstGuessElem[0].selected = false;

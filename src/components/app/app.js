@@ -76,9 +76,10 @@ export default class App extends Component {
     }
 
     zeroOutCount() {
+        setTimeout( () =>
         this.setState((state) => {
             return {count: 0}
-        });
+        }), 1300);
     }
 
     onCountClick = (id) => {
@@ -109,11 +110,12 @@ export default class App extends Component {
                         cardsData: this.changeProperty(cardsData, id, 'selected', true)
                     };
                 });
-                this.setState(({cardsData}) => {
-                    return {
-                        cardsData: this.changeProperty(cardsData, id, 'secondGuess', name)
-                    };
-                });
+                setTimeout(() =>
+                    this.setState(({cardsData}) => {
+                        return {
+                            cardsData: this.changeProperty(cardsData, id, 'secondGuess', name)
+                        };
+                    }), 1200);
                 this.zeroOutCount();
             }
         }
