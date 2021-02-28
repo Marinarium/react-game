@@ -43,9 +43,7 @@ export default class App extends Component {
         ].sort(() => 0.5 - Math.random()),
         count: 0,
         gameState: {
-            score: 0,
-            time: "00:00",
-
+            score: 0
         }
     }
 
@@ -87,7 +85,7 @@ export default class App extends Component {
         }), 1300);
     }
 
-    onCountClick = (id) => {
+    onCountClick = () => {
         // this.setState((state) => {
         //     return {count: state.count + 1}
         // });

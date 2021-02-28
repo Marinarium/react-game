@@ -11,8 +11,7 @@ export default class Header extends Component {
     };
 
     menuItems = [
-        {name: 'Home', linkTo: '/'},
-        {name: 'Start Game', linkTo: '/game'},
+        {name: 'Game', linkTo: '/'},
         {name: 'Settings', linkTo: '/settings'},
         {name: 'Statistic', linkTo: '/statistic'}
     ];
@@ -52,7 +51,8 @@ export default class Header extends Component {
 
         return (
             <header className='header'>
-                <h1 className='logo'><Link to="/" className="logo__link">MemoryGame</Link></h1>
+                {/*<h1 className='logo'><Link to="/" className="logo__link">MemoryGame</Link></h1>*/}
+                <h1 className='logo logo__link'>MemoryGame</h1>
                 <nav className='menu'>
                     <div className={classBurger}
                          id="burger"

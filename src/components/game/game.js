@@ -19,7 +19,6 @@ export default class Game extends Component {
     }
 
     render() {
-        console.log('game')
         const {cards, onCountClick, onSelectCard, gameState} = this.props;
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
@@ -65,10 +64,6 @@ export default class Game extends Component {
             <section className='game'>
                 <section className="status">
                     <div className="status__row">
-                        <h2 className="status__title">Game time:</h2>
-                        <span className="status__state countdown">{gameState.time}</span>
-                    </div>
-                    <div className="status__row">
                         <h2 className="status__title">Score:</h2>
                         <span className="status__state score">{gameState.score}</span>
                     </div>
@@ -78,7 +73,10 @@ export default class Game extends Component {
                     <h2 className="finish-title">{finishGame}</h2>
                 </section>
                 <div className="buttons">
-                    <button className="button button__new-game" type="button">New Game</button>
+                    <button
+                        className="button button__new-game"
+                        type="button"
+                        onClick={this.finishCurrentGame}>New Game</button>
                     <button
                         className="button button__finish"
                         type="button"

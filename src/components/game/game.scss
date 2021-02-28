@@ -22,7 +22,7 @@
 }
 
 .status__title {
-  @include font-style(500);
+  @include font-style(500, 20px);
   line-height: 1.25;
   color: $dark;
   margin-right: 8px;
@@ -33,7 +33,7 @@
   font-family: 'Roboto Mono', monospace;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.2;
   color: $dark;
 }
@@ -53,6 +53,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  position: relative;
 }
 
 .buttons {
