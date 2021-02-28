@@ -1,41 +1,57 @@
 @import '../../assets/styles/main.scss';
-
-
 .card {
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all .4s linear;
+  transform-style: preserve-3d;
   margin: 5px;
+  height: 150px;
+  width: 150px;
+}
+
+.back,
+.front {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.back,
+.front {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
+  z-index: 2;
   background-color: $light-blue;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 150px;
-  width: 150px;
-  box-shadow: $grey-shadow;
-  border-radius: 5px;
-  transition-duration: 300ms;
-  cursor: pointer;
+  transition-duration: 200ms;
+  transition-property: background-color;
 
   &:hover {
-    background-color: $medium-blue;
+    background-color: #81cbfa;
   }
+}
+
+.back {
+  transform: rotateY(180deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition-duration: 400ms;
 }
 
 .selected {
-  background-color: lightgreen;
+  transform: rotateY(180deg);
   cursor: auto;
-  &:hover {
-    background-color: #9ff69f;
-  }
 }
 
 .match {
-  border: 4px solid lightseagreen;
-  background-image: none !important;
-  background-color: transparent;
-  box-sizing: border-box;
-  cursor: auto;
-  position: relative;
-  z-index: -1;
-  &:hover {
-    background-color: transparent;
+  .back {
+    transform: scale(0.5);
   }
 }

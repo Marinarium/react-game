@@ -17,11 +17,12 @@ export default class Card extends Component {
 
         return (
             <div className={classNames}
-                 style={style}
                  onClick={(e) => {
                      onCountClick();
                      onSelectCard();
                  }}>
+                <div className="front"></div>
+                <div className="back" style={style}></div>
             </div>
         )
     }
