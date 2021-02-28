@@ -51,8 +51,7 @@ export default class Header extends Component {
 
         return (
             <header className='header'>
-                {/*<h1 className='logo'><Link to="/" className="logo__link">MemoryGame</Link></h1>*/}
-                <h1 className='logo logo__link'>MemoryGame</h1>
+                <h1 className='logo'><Link to="/" className="logo__link">MemoryGame</Link></h1>
                 <nav className='menu'>
                     <div className={classBurger}
                          id="burger"

@@ -6,7 +6,29 @@ import cover from './images/cover.svg'
 import {Link} from 'react-router-dom'
 
 export default class GameDescription extends Component {
+    topics = [
+        {name: 'animals', label: 'Animals'},
+        {name: 'plants', label: 'Plants'}
+    ];
+
     render() {
+
+        const {topic, onTopicChange} = this.props;
+
+        const topics = this.topics.map(({name, label}) => {
+
+            const isActive = topic === name;
+            const clazz = isActive ? 'active' : ''
+
+            return (
+                <button type='button'
+                        className={`config__option ${clazz}`}
+                        key={name}
+                        onClick={() => onTopicChange(name)}>
+                    {label}</button>
+            );
+        });
+
         return (
             <section className='game-desc'>
                 <div className="game-desc__frame">
@@ -30,14 +52,18 @@ export default class GameDescription extends Component {
                             </div>
                             <div className="config__row">
                                 <h4 className="config__subtitle">Topic:</h4>
-                                <div className="config__options"><span className="config__option topic_nature active">Nature</span> / <span className="config__option topic_things">Things</span></div>
+                                <div className="config__options">
+                                    {topics}
+                                </div>
                             </div>
                             <div className="config__row">
-                                <h4 className="config__subtitle">Time limit:</h4>
-                                <div className="config__options"><span className="config__option limit_yes active">Yes</span> / <span className="config__option limit_no">No</span></div>
+                                <h4 className="config__subtitle">Сolor theme:</h4>
+                                <div className="config__options"><span className="config__option limit_yes active">Blue</span> / <span className="config__option limit_no">Green</span></div>
                             </div>
                         </div>
-                        <Link to="/game" className="button config__btn-start">Start</Link>
+                        <Link to="/game"
+                              className="button config__btn-start"
+                              >Start</Link>
                     </section>
                 </div>
             </section>

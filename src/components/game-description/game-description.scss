@@ -43,14 +43,14 @@
 
 .game-desc__text {
   @include font-style(normal, 14px);
-  line-height: 1.5;
+  line-height: 1.75;
   color: $dark;
   max-width: 400px;
   margin-bottom: 25px;
 }
 
 .config__row {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .config__title {
@@ -59,7 +59,7 @@
   letter-spacing: 0.005em;
   text-transform: capitalize;
   color: $dark-blue;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .config__box {
@@ -79,13 +79,32 @@
   @include font-style(normal);
   line-height: 1.25;
   color: $grey;
+  letter-spacing: 0.02em;
 }
 
 .config__option {
   cursor: pointer;
-  &.active {
+  @include font-style(normal, 14px);
+  color: $grey;
+  font-weight: 500;
+  border: 1px solid $grey;
+  border-radius: 3px;
+  background-color: $light;
+  margin-right: 6px;
+  min-width: 80px;
+  padding: 5px;
+  box-sizing: border-box;
+  transition-duration: 300ms;
+  &.active,
+  &:focus {
+    outline: none;
     color: $light-blue;
+    border: 1px solid $light-blue;
     font-weight: 500;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
   }
 }
 
