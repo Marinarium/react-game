@@ -5,8 +5,22 @@ import './game.scss';
 
 export default class Game extends Component {
 
-       render() {
-        const {cards, onCountClick, onSelectCard} = this.props;
+    state = {
+        finishStatus: false,
+    }
+
+    finishCurrentGame = () => {
+        console.log('game was finished');
+        this.setState((state) => {
+            return {
+                finishStatus: true
+            };
+        });
+    }
+
+    render() {
+        console.log('game')
+        const {cards, onCountClick, onSelectCard, gameState} = this.props;
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
         const secondGuessElem = cards.filter((el) => el.secondGuess);
@@ -18,13 +32,22 @@ export default class Game extends Component {
                 secondGuessElem[0].match = true;
                 firstGuessElem[0].firstGuess = false;
                 secondGuessElem[0].secondGuess = false;
-            }
-            else {
+                gameState.score += 10;
+            } else {
                 firstGuessElem[0].firstGuess = false;
                 secondGuessElem[0].secondGuess = false;
                 firstGuessElem[0].selected = false;
                 secondGuessElem[0].selected = false;
+                if (gameState.score > 0) {
+                    gameState.score -= 5;
+                }
             }
+        }
+
+
+        let finishGame = '';
+        if (cards.every((el) => el.match) || this.state.finishStatus) {
+            finishGame = "Please, reload this page for a new game"
         }
 
         const allCards = cards.map((item) => {
@@ -43,19 +66,23 @@ export default class Game extends Component {
                 <section className="status">
                     <div className="status__row">
                         <h2 className="status__title">Game time:</h2>
-                        <span className="status__state countdown">1:27</span>
+                        <span className="status__state countdown">{gameState.time}</span>
                     </div>
                     <div className="status__row">
                         <h2 className="status__title">Score:</h2>
-                        <span className="status__state score">1083</span>
+                        <span className="status__state score">{gameState.score}</span>
                     </div>
                 </section>
                 <section className="game-box">
                     {allCards}
+                    <h2 className="finish-title">{finishGame}</h2>
                 </section>
                 <div className="buttons">
                     <button className="button button__new-game" type="button">New Game</button>
-                    <button className="button button__finish" type="button">Finish</button>
+                    <button
+                        className="button button__finish"
+                        type="button"
+                        onClick={this.finishCurrentGame}>Finish</button>
                 </div>
             </section>
         );

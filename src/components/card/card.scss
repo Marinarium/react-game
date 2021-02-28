@@ -55,3 +55,9 @@
     transform: scale(0.5);
   }
 }
+
+.finish-title {
+  position: absolute;
+  @include font-style(bold, 30px);
+  color: $dark-blue;
+}

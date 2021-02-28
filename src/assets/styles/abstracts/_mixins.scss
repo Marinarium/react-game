@@ -38,7 +38,9 @@
   cursor: pointer;
   transition-duration: 300ms;
 
-  &:hover {
+  &:hover,
+  &:focus{
+    outline: none;
     background-color: $medium-blue;
     border: 2px solid $medium-blue;
   }
@@ -63,7 +65,9 @@
   cursor: pointer;
   transition-duration: 300ms;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     background-color: $medium-blue;
     border: 2px solid $medium-blue;
     color: $light;

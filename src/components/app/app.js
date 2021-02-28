@@ -41,7 +41,12 @@ export default class App extends Component {
             // this.createCardItem('coin', 'images/coin.png'),
             // this.createCardItem('goomba', 'images/goomba.png')
         ].sort(() => 0.5 - Math.random()),
-        count: 0
+        count: 0,
+        gameState: {
+            score: 0,
+            time: "00:00",
+
+        }
     }
 
     createCardItem(name, img) {
@@ -122,17 +127,17 @@ export default class App extends Component {
     };
 
     render() {
-        const selectedElems = this.state.cardsData.filter((el) => el.selected).length;
+
         return (
             <Router>
                 <div className='main-wrapper'>
                     <Header/>
                     <main className='main'>
-                        <h2>{selectedElems}</h2>
                         <Route path="/" component={GameDescription} exact/>
                         <Route
                             path="/game"
                             render={(props) => <Game
+                                gameState={this.state.gameState}
                                 cards={this.state.cardsData}
                                 onCountClick={this.onCountClick}
                                 onSelectCard={this.onSelectCard}
