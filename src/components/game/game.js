@@ -38,7 +38,7 @@ export default class Game extends Component {
                 firstGuessElem[0].selected = false;
                 secondGuessElem[0].selected = false;
                 if (gameState.score > 0) {
-                    gameState.score -= 5;
+                    gameState.score -= 2;
                 }
             }
         }
