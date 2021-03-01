@@ -16,30 +16,30 @@ export default class App extends Component {
 
     animalsCardsData = [
         this.createCardItem('beaver', 'images/animals/beaver.png'),
-        this.createCardItem('crocodile', 'images/animals/crocodile.png'),
-        this.createCardItem('elephant', 'images/animals/elephant.png'),
-        this.createCardItem('fox', 'images/animals/fox.png'),
-        this.createCardItem('giraffe', 'images/animals/giraffe.png'),
-        this.createCardItem('goat', 'images/animals/goat.png'),
-        this.createCardItem('penguin', 'images/animals/penguin.png'),
-        this.createCardItem('hippo', 'images/animals/hippo.png'),
-        this.createCardItem('lion', 'images/animals/lion.png'),
-        this.createCardItem('meerkat', 'images/animals/meerkat.png'),
-        this.createCardItem('owl', 'images/animals/owl.png'),
-        this.createCardItem('panda', 'images/animals/panda.png'),
         this.createCardItem('beaver', 'images/animals/beaver.png'),
         this.createCardItem('crocodile', 'images/animals/crocodile.png'),
+        this.createCardItem('crocodile', 'images/animals/crocodile.png'),
+        this.createCardItem('elephant', 'images/animals/elephant.png'),
         this.createCardItem('elephant', 'images/animals/elephant.png'),
         this.createCardItem('fox', 'images/animals/fox.png'),
+        this.createCardItem('fox', 'images/animals/fox.png'),
+        this.createCardItem('giraffe', 'images/animals/giraffe.png'),
         this.createCardItem('giraffe', 'images/animals/giraffe.png'),
         this.createCardItem('goat', 'images/animals/goat.png'),
+        this.createCardItem('goat', 'images/animals/goat.png'),
+        this.createCardItem('penguin', 'images/animals/penguin.png'),
         this.createCardItem('penguin', 'images/animals/penguin.png'),
         this.createCardItem('hippo', 'images/animals/hippo.png'),
+        this.createCardItem('hippo', 'images/animals/hippo.png'),
+        this.createCardItem('lion', 'images/animals/lion.png'),
         this.createCardItem('lion', 'images/animals/lion.png'),
         this.createCardItem('meerkat', 'images/animals/meerkat.png'),
+        this.createCardItem('meerkat', 'images/animals/meerkat.png'),
+        this.createCardItem('owl', 'images/animals/owl.png'),
         this.createCardItem('owl', 'images/animals/owl.png'),
         this.createCardItem('panda', 'images/animals/panda.png'),
-    ].sort(() => 0.5 - Math.random());
+        this.createCardItem('panda', 'images/animals/panda.png')
+    ];
     plantsCardsData = [
         this.createCardItem('beach', 'images/plants/beach.png'),
         this.createCardItem('beach', 'images/plants/beach.png'),
@@ -65,13 +65,13 @@ export default class App extends Component {
         this.createCardItem('spruce', 'images/plants/spruce.png'),
         this.createCardItem('sunflower', 'images/plants/sunflower.png'),
         this.createCardItem('sunflower', 'images/plants/sunflower.png')
-    ].sort(() => 0.5 - Math.random());
+    ];
 
     state = {
         topic: 'animals', //plants
-        level: 3,
+        level: 'pro',
         colorTheme: 'blue',
-        cardsData: this.animalsCardsData,
+        cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random()),
         count: 0,
         gameState: {
             score: 0
@@ -82,13 +82,45 @@ export default class App extends Component {
     onTopicChange = (topic) => {
         this.setState({topic});
         this.setState(({cardsData}) => {
-            if (topic === 'plants') {
+            if (topic === 'plants' && this.state.level === 'pro') {
                 return {
-                    cardsData: this.plantsCardsData
+                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random()),
+                };
+            } else if (topic === 'animals' && this.state.level === 'pro') {
+                return {
+                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random()),
+                };
+            } else if (topic === 'plants' && this.state.level === 'easy') {
+                return {
+                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
                 };
             } else {
                 return {
-                    cardsData: this.animalsCardsData
+                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+                };
+            }
+        });
+        this.zeroOutCount();
+    }
+
+    onLevelChange = (level) => {
+        this.setState({level});
+        this.setState(({cardsData}) => {
+            if (level === 'easy' && this.state.topic === 'animals') {
+                return {
+                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+                };
+            } else if (level === 'pro' && this.state.topic === 'animals') {
+                return {
+                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random()),
+                };
+            } else if (level === 'easy' && this.state.topic === 'plants') {
+                return {
+                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+                };
+            } else {
+                return {
+                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random()),
                 };
             }
         });
@@ -105,6 +137,10 @@ export default class App extends Component {
             match: false,
             id: this.someId++
         }
+    }
+
+    sortByField(field) {
+        return (a, b) => a[field] > b[field] ? 1 : -1;
     }
 
     changeProperty(arr, id, propName, newProp) {
@@ -181,8 +217,10 @@ export default class App extends Component {
                     <main className='main'>
                         <Route path="/" exact
                                render={(props) => <GameDescription
+                                   level={this.state.level}
                                    topic={this.state.topic}
                                    onTopicChange={this.onTopicChange}
+                                   onLevelChange={this.onLevelChange}
                                />}
                         />
                         <Route

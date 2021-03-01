@@ -6,6 +6,11 @@ import cover from './images/cover.svg'
 import {Link} from 'react-router-dom'
 
 export default class GameDescription extends Component {
+    levels = [
+        {name: 'easy', label: 'Easy-Peasy'},
+        {name: 'pro', label: 'Pro'}
+    ]
+
     topics = [
         {name: 'animals', label: 'Animals'},
         {name: 'plants', label: 'Plants'}
@@ -13,7 +18,7 @@ export default class GameDescription extends Component {
 
     render() {
 
-        const {topic, onTopicChange} = this.props;
+        const {topic, onTopicChange, level, onLevelChange} = this.props;
 
         const topics = this.topics.map(({name, label}) => {
 
@@ -25,6 +30,20 @@ export default class GameDescription extends Component {
                         className={`config__option ${clazz}`}
                         key={name}
                         onClick={() => onTopicChange(name)}>
+                    {label}</button>
+            );
+        });
+
+        const levels = this.levels.map(({name, label}) => {
+
+            const isActive = level === name;
+            const clazz = isActive ? 'active' : ''
+
+            return (
+                <button type='button'
+                        className={`config__option ${clazz}`}
+                        key={name}
+                        onClick={() => onLevelChange(name)}>
                     {label}</button>
             );
         });
@@ -45,9 +64,7 @@ export default class GameDescription extends Component {
                             <div className="config__row">
                                 <h4 className="config__subtitle">Level:</h4>
                                 <div className="config__options">
-                                    <button className="config__btn config__btn_minus config__btn_disabled" type='button'>-</button>
-                                    <span className="config__level">1</span>
-                                    <button className="config__btn config__btn_plus" type='button'>+</button>
+                                    {levels}
                                 </div>
                             </div>
                             <div className="config__row">
