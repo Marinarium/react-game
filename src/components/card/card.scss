@@ -8,6 +8,16 @@
   margin: 5px;
   height: 100px;
   width: 100px;
+
+  @media (max-width: 735px) {
+    height: 70px;
+    width: 70px;
+  }
+
+  @media (max-width: 360px) {
+    height: 60px;
+    width: 60px;
+  }
 }
 
 .back,
@@ -29,11 +39,11 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  transition-duration: 200ms;
-  transition-property: background-color;
+  transition-duration: 350ms;
+  filter: saturate(100%);
 
   &:hover {
-    background-color: #81cbfa;
+    filter: saturate(140%);
   }
 }
 

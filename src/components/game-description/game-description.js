@@ -95,7 +95,7 @@ export default class GameDescription extends Component {
                                 </div>
                             </div>
                             <div className="config__row">
-                                <h4 className="config__subtitle">Back of Cards:</h4>
+                                <h4 className="config__subtitle">Back:</h4>
                                 <div className="config__options">
                                     {colors}
                                 </div>
