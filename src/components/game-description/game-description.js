@@ -6,6 +6,8 @@ import cover from './images/cover.svg'
 import {Link} from 'react-router-dom'
 
 export default class GameDescription extends Component {
+    randomColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6)
+
     levels = [
         {name: 'easy', label: 'Easy-Peasy'},
         {name: 'pro', label: 'Pro'}
@@ -16,9 +18,14 @@ export default class GameDescription extends Component {
         {name: 'plants', label: 'Plants'}
     ];
 
+    colors = [
+        {name: 'blue', label: 'Blue', colorCode: '#9DD6FA'},
+        {name: 'random', label: 'Random', colorCode: this.randomColor }
+    ];
+
     render() {
 
-        const {topic, onTopicChange, level, onLevelChange} = this.props;
+        const {topic, onTopicChange, level, onLevelChange, color, onColorChange} = this.props;
 
         const topics = this.topics.map(({name, label}) => {
 
@@ -44,6 +51,20 @@ export default class GameDescription extends Component {
                         className={`config__option ${clazz}`}
                         key={name}
                         onClick={() => onLevelChange(name)}>
+                    {label}</button>
+            );
+        });
+
+        const colors = this.colors.map(({name, label, colorCode}) => {
+
+            const isActive = color === name;
+            const clazz = isActive ? 'active' : ''
+
+            return (
+                <button type='button'
+                        className={`config__option ${clazz}`}
+                        key={name}
+                        onClick={() => onColorChange(name, colorCode)}>
                     {label}</button>
             );
         });
@@ -74,13 +95,15 @@ export default class GameDescription extends Component {
                                 </div>
                             </div>
                             <div className="config__row">
-                                <h4 className="config__subtitle">Сolor theme:</h4>
-                                <div className="config__options"><span className="config__option limit_yes active">Blue</span> / <span className="config__option limit_no">Green</span></div>
+                                <h4 className="config__subtitle">Back of Cards:</h4>
+                                <div className="config__options">
+                                    {colors}
+                                </div>
                             </div>
                         </div>
                         <Link to="/game"
                               className="button config__btn-start"
-                              >Start</Link>
+                        >Start</Link>
                     </section>
                 </div>
             </section>

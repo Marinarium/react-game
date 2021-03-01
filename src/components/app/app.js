@@ -68,16 +68,16 @@ export default class App extends Component {
     ];
 
     state = {
-        topic: 'animals', //plants
+        topic: 'animals',
         level: 'pro',
-        colorTheme: 'blue',
+        color: 'blue',
+        colorCode: '#9DD6FA',
         cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random()),
         count: 0,
         gameState: {
             score: 0
         }
     }
-
 
     onTopicChange = (topic) => {
         this.setState({topic});
@@ -125,6 +125,11 @@ export default class App extends Component {
             }
         });
         this.zeroOutCount();
+    }
+
+    onColorChange = (color, colorCode) => {
+        this.setState({color});
+        this.setState({colorCode});
     }
 
     createCardItem(name, img) {
@@ -219,13 +224,16 @@ export default class App extends Component {
                                render={(props) => <GameDescription
                                    level={this.state.level}
                                    topic={this.state.topic}
+                                   color={this.state.color}
                                    onTopicChange={this.onTopicChange}
                                    onLevelChange={this.onLevelChange}
+                                   onColorChange={this.onColorChange}
                                />}
                         />
                         <Route
                             path="/game"
                             render={(props) => <Game
+                                color={this.state.colorCode}
                                 gameState={this.state.gameState}
                                 cards={this.state.cardsData}
                                 onCountClick={this.onCountClick}

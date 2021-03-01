@@ -19,7 +19,7 @@ export default class Game extends Component {
     }
 
     render() {
-        const {cards, onCountClick, onSelectCard, gameState} = this.props;
+        const {cards, onCountClick, onSelectCard, gameState, color} = this.props;
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
         const secondGuessElem = cards.filter((el) => el.secondGuess);
@@ -54,6 +54,7 @@ export default class Game extends Component {
             return (
                 <Card {...itemProps}
                       key={id}
+                      color={color}
                       style={{backgroundImage: `url(${img})`}}
                       onSelectCard={() => onSelectCard(id, name, firstGuess)}
                       onCountClick={() => onCountClick(id)}/>
@@ -76,13 +77,16 @@ export default class Game extends Component {
                     <button
                         className="button button__new-game"
                         type="button"
-                        onClick={this.finishCurrentGame}>New Game</button>
+                        onClick={this.finishCurrentGame}>New Game
+                    </button>
                     <button
                         className="button button__finish"
                         type="button"
-                        onClick={this.finishCurrentGame}>Finish</button>
+                        onClick={this.finishCurrentGame}>Finish
+                    </button>
                 </div>
             </section>
         );
     }
+
 }
