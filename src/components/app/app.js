@@ -69,10 +69,10 @@ export default class App extends Component {
 
     state = {
         topic: 'animals',
-        level: 'pro',
+        level: 'easy',
         color: 'blue',
         colorCode: '#9DD6FA',
-        cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random()),
+        cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
         count: 0,
         gameState: {
             score: 0
@@ -84,53 +84,88 @@ export default class App extends Component {
         this.setState(({cardsData}) => {
             if (topic === 'plants' && this.state.level === 'pro') {
                 return {
-                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random()),
+                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
                 };
             } else if (topic === 'animals' && this.state.level === 'pro') {
                 return {
-                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random()),
+                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
                 };
             } else if (topic === 'plants' && this.state.level === 'easy') {
                 return {
-                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
                 };
             } else {
                 return {
-                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
                 };
             }
         });
         this.zeroOutCount();
-    }
+    };
 
     onLevelChange = (level) => {
         this.setState({level});
         this.setState(({cardsData}) => {
             if (level === 'easy' && this.state.topic === 'animals') {
                 return {
-                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
                 };
             } else if (level === 'pro' && this.state.topic === 'animals') {
                 return {
-                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random()),
+                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
                 };
             } else if (level === 'easy' && this.state.topic === 'plants') {
                 return {
-                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
                 };
             } else {
                 return {
-                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random()),
+                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
                 };
             }
         });
         this.zeroOutCount();
-    }
+    };
 
     onColorChange = (color, colorCode) => {
         this.setState({color});
         this.setState({colorCode});
-    }
+    };
+
+    onFinishGame = () => {
+        this.setState(({cardsData}) => {
+            return {
+                cardsData: []
+            };
+        });
+        this.zeroOutCount();
+    };
+
+    onNewGame = () => {
+        this.setState((state) => {
+            return {count: 0}
+        });
+        this.setState(({cardsData}) => {
+            if (this.state.topic === 'plants' && this.state.level === 'pro') {
+                return {
+                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
+                };
+            } else if (this.state.topic === 'animals' && this.state.level === 'pro') {
+                return {
+                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
+                };
+            } else if (this.state.topic === 'plants' && this.state.level === 'easy') {
+                return {
+                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                };
+            } else {
+                return {
+                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                };
+            }
+        });
+        this.setState({ gameState: { ...this.state.gameState, score: 0 } })
+    };
 
     createCardItem(name, img) {
         return {
@@ -228,6 +263,7 @@ export default class App extends Component {
                                    onTopicChange={this.onTopicChange}
                                    onLevelChange={this.onLevelChange}
                                    onColorChange={this.onColorChange}
+                                   onNewGame={this.onNewGame}
                                />}
                         />
                         <Route
@@ -238,6 +274,8 @@ export default class App extends Component {
                                 cards={this.state.cardsData}
                                 onCountClick={this.onCountClick}
                                 onSelectCard={this.onSelectCard}
+                                onFinishGame={this.onFinishGame}
+                                onNewGame={this.onNewGame}
                             />}
                         />
                         <Route path="/settings" component={Settings}/>

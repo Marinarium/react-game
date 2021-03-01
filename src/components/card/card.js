@@ -15,8 +15,6 @@ export default class Card extends Component {
             classNames += ' match';
         }
 
-        // let choosenColor = color === 'random' ? '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6) : '#9DD6FA'
-
         return (
             <div className={classNames}
                  onClick={(e) => {

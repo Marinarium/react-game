@@ -67,11 +67,9 @@
 }
 
 .finish-title {
-  position: absolute;
-  top: 30px;
   @include font-style(bold, 30px);
   color: $dark-blue;
-  background-color: $light;
-  box-shadow: $grey-shadow;
-  border-radius: 5px;
+  text-align: center;
+  margin: auto;
+  width: 90%;
 }

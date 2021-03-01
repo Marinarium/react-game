@@ -10,7 +10,6 @@ export default class Game extends Component {
     }
 
     finishCurrentGame = () => {
-        console.log('game was finished');
         this.setState((state) => {
             return {
                 finishStatus: true
@@ -19,7 +18,7 @@ export default class Game extends Component {
     }
 
     render() {
-        const {cards, onCountClick, onSelectCard, gameState, color} = this.props;
+        const {cards, onCountClick, onSelectCard, gameState, color, onFinishGame, onNewGame} = this.props;
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
         const secondGuessElem = cards.filter((el) => el.secondGuess);
@@ -43,10 +42,9 @@ export default class Game extends Component {
             }
         }
 
-
         let finishGame = '';
         if (cards.every((el) => el.match) || this.state.finishStatus) {
-            finishGame = "Please, reload this page for a new game"
+            finishGame = `Thanks for the game! Your score is ${gameState.score}`;
         }
 
         const allCards = cards.map((item) => {
@@ -70,19 +68,19 @@ export default class Game extends Component {
                     </div>
                 </section>
                 <section className="game-box">
-                    {allCards}
                     <h2 className="finish-title">{finishGame}</h2>
+                    {allCards}
                 </section>
                 <div className="buttons">
                     <button
                         className="button button__new-game"
                         type="button"
-                        onClick={this.finishCurrentGame}>New Game
+                        onClick={() => onNewGame()}>New Game
                     </button>
                     <button
                         className="button button__finish"
                         type="button"
-                        onClick={this.finishCurrentGame}>Finish
+                        onClick={() => onFinishGame()}>Finish
                     </button>
                 </div>
             </section>
