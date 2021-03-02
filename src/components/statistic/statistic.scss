@@ -28,23 +28,42 @@
   letter-spacing: 0.015em;
   color: $dark-blue;
   text-align: left;
+  border-left: 1px solid $grey;
+  border-right: 1px solid $grey;
 
   th {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     padding-right: 70px;
+    padding-top: 20px;
+    background-color: $light-blue;
+    color: $dark;
     @media (max-width: 670px) {
       padding-right: 25px;
     }
   }
 
   tr td {
-    padding-bottom: 25px;
+    padding-top: 10px;
+    padding-bottom: 13px;
     padding-right: 90px;
     color: $dark;
     padding-left: 5px;
     @media (max-width: 670px) {
       padding-right: 25px;
     }
+  }
+
+  tr td:first-child,
+  tr th:first-child {
+    padding-left: 25px;
+  }
+
+  tr:nth-child(2n) {
+    background-color: $grey;
+  }
+
+  tr:nth-child(2n) td {
+    color: $light;
   }
 
   th {
