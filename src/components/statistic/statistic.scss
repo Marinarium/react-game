@@ -87,4 +87,8 @@
       font-size: 14px;
     }
   }
+
+  th:nth-child(2n) {
+    border-bottom: 1px solid $grey;
+  }
 }
