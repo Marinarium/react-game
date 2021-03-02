@@ -75,7 +75,7 @@ export default class App extends Component {
         color: 'blue',
         colorCode: '#9DD6FA',
         cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
-        statisticData: this.localStatisticData,
+        statisticData: this.localStatisticData.sort(this.sortByFieldFromBiggest('score')).slice(0, 10),
         count: 0,
         gameState: {
             score: 0
@@ -176,7 +176,6 @@ export default class App extends Component {
             const currentDate = new Date().toLocaleDateString();
             const currentTime = new Date().toLocaleTimeString();
             const newStatisticItem = {
-                id: ++this.statisticId,
                 score: newScore,
                 currentDate: currentDate,
                 currentTime: currentTime
@@ -186,6 +185,8 @@ export default class App extends Component {
                     ...statisticData,
                     newStatisticItem
                 ];
+
+                newStatsArr.sort(this.sortByFieldFromBiggest('score')).slice(0, 10);
 
                 return {
                     statisticData: newStatsArr
@@ -208,6 +209,10 @@ export default class App extends Component {
 
     sortByField(field) {
         return (a, b) => a[field] > b[field] ? 1 : -1;
+    }
+
+    sortByFieldFromBiggest(field) {
+        return (a, b) => a[field] < b[field] ? 1 : -1;
     }
 
     changeProperty(arr, id, propName, newProp) {

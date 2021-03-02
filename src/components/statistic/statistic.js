@@ -4,6 +4,8 @@ import './statistic.scss';
 
 export default class Statistic extends Component {
 
+    orderPlace = 1;
+
     render() {
 
         const {statisticData} = this.props;
@@ -11,10 +13,10 @@ export default class Statistic extends Component {
         localStorage.setItem('myStatistic', JSON.stringify(statisticData));
 
         const statisticItems = statisticData.map((item) => {
-            const {id, score, currentDate, currentTime} = item;
+            const {score, currentDate, currentTime} = item;
             return (
-                <tr key={id}>
-                    <td>{id}</td>
+                <tr key={++this.orderPlace}>
+                    <td>{this.orderPlace}</td>
                     <td>{score}</td>
                     <td>{currentDate}</td>
                     <td>{currentTime}</td>
@@ -25,11 +27,11 @@ export default class Statistic extends Component {
         return (
             <section className="statistic">
                 <h2 className="statistic__title">Statistic</h2>
-                <p className="statistic__desc">All your attempts will be added to your statistic :)</p>
+                <p className="statistic__desc">The best ten attempts will be added to your statistic :)</p>
                 <table className="statistic__table">
                     <thead>
                     <tr>
-                        <th>Game</th>
+                        <th>Place</th>
                         <th>Score</th>
                         <th>Date</th>
                         <th>Time</th>
