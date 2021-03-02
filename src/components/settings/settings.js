@@ -50,13 +50,13 @@ export default class Settings extends Component {
                 <h2 className="settings__title">Settings</h2>
                 <div className="settings__info">
                     <div className="settings__box">
-                        <h3 className="settings__subtitle">Music</h3>
+                        <h3 className="settings__subtitle">Music:</h3>
                         <div className="settings__options">
                             {musicControls}
                         </div>
                     </div>
                     <div className="settings__box">
-                        <h3 className="settings__subtitle">Sounds</h3>
+                        <h3 className="settings__subtitle">Sounds:</h3>
                         <div className="settings__options">
                             {soundControls}
                         </div>

@@ -6,7 +6,7 @@ import './game.scss';
 export default class Game extends Component {
 
     render() {
-        const {cards, onCountClick, onSelectCard, gameState, color, onFinishGame, onNewGame, addStatisticItem} = this.props;
+        const {cards, onSelectCard, gameState, color, onFinishGame, onNewGame, addStatisticItem} = this.props;
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
         const secondGuessElem = cards.filter((el) => el.secondGuess);
@@ -42,8 +42,7 @@ export default class Game extends Component {
                       key={id}
                       color={color}
                       style={{backgroundImage: `url(${img})`}}
-                      onSelectCard={() => onSelectCard(id, name, firstGuess)}
-                      onCountClick={() => onCountClick(id)}/>
+                      onSelectCard={() => onSelectCard(id, name, firstGuess)}/>
             );
         });
 

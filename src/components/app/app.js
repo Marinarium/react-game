@@ -69,7 +69,7 @@ export default class App extends Component {
     localStatisticData = (localStorage.getItem('myStatistic')) ? JSON.parse(localStorage.getItem('myStatistic')) : [];
 
     musicBackground = new Audio('audio/get-lucky.mp3');
-    audioClickOnCard = new Audio('audio/pew.mp3');
+    soundPew = new Audio('audio/pew.mp3');
 
     state = {
         topic: 'animals',
@@ -153,6 +153,12 @@ export default class App extends Component {
     onSoundsChange = (sounds) => {
         this.setState({sounds});
     }
+
+    onSoundClick() {
+        if (this.state.sounds === 'on') {
+            this.soundPew.play();
+        }
+    };
 
     onFinishGame = () => {
         this.setState(({cardsData}) => {
@@ -261,16 +267,11 @@ export default class App extends Component {
             }), 1300);
     }
 
-    onCountClick = () => {
-        // this.setState((state) => {
-        //     return {count: state.count + 1}
-        // });
-    };
-
     onSelectCard = (id, name, firstGuess) => {
         if (this.state.count < 2) {
             if (this.state.count === 0) {
                 this.incrementCount();
+                this.onSoundClick();
                 this.setState(({cardsData}) => {
                     return {
                         cardsData: this.changeProperty(cardsData, id, 'selected', true)
@@ -284,6 +285,7 @@ export default class App extends Component {
             }
             if (this.state.count === 1 && !firstGuess) {
                 this.incrementCount();
+                this.onSoundClick();
                 this.setState(({cardsData}) => {
                     return {
                         cardsData: this.changeProperty(cardsData, id, 'selected', true)
@@ -325,7 +327,6 @@ export default class App extends Component {
                                 color={this.state.colorCode}
                                 gameState={this.state.gameState}
                                 cards={this.state.cardsData}
-                                onCountClick={this.onCountClick}
                                 onSelectCard={this.onSelectCard}
                                 onFinishGame={this.onFinishGame}
                                 onNewGame={this.onNewGame}

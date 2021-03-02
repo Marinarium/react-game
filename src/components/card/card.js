@@ -5,11 +5,7 @@ import './card.scss';
 export default class Card extends Component {
 
     render() {
-        const {style, onCountClick, onSelectCard, selected, match, color} = this.props;
-        // const audioClickOnCard = new Audio('audio/pew.mp3');
-        // const start = () => {
-        //     audioClickOnCard.play();
-        // }
+        const {style, onSelectCard, selected, match, color} = this.props;
 
         let classNames = 'card';
         if (selected) {
@@ -22,7 +18,6 @@ export default class Card extends Component {
         return (
             <div className={classNames}
                  onClick={(e) => {
-                     onCountClick();
                      onSelectCard();
                  }}>
                 <div className="front" style={{backgroundColor: `${color}`}}></div>
