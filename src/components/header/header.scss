@@ -112,13 +112,14 @@
 }
 
 .menu__list {
-  //display: none;
   @include visually-hidden;
   top: 90px;
   right: -100vw;
   background-color: $dark-blue;
   transition-property: right;
   transition-duration: 300ms;
+  background-image: url("./images/absurdity.png");
+  background-repeat: repeat;
 
   &.active {
     @include remove-visually-hidden;

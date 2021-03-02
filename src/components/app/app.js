@@ -6,6 +6,7 @@ import GameDescription from "../game-description/game-description";
 import Game from "../game/game";
 import Settings from "../settings/settings";
 import Statistic from "../statistic/statistic";
+import Hotkeys from "../hotkeys/hotkeys";
 
 import './app.scss';
 
@@ -347,6 +348,7 @@ export default class App extends Component {
                                    statisticData={this.state.statisticData}
                                />}
                         />
+                        <Route path="/hotkeys" component={Hotkeys} />
                     </main>
                     <Footer/>
                 </div>
