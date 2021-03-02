@@ -8,6 +8,8 @@ export default class Statistic extends Component {
 
         const {statisticData} = this.props;
 
+        localStorage.setItem('myStatistic', JSON.stringify(statisticData));
+
         const statisticItems = statisticData.map((item) => {
             const {id, score, currentDate, currentTime} = item;
             return (
@@ -25,13 +27,17 @@ export default class Statistic extends Component {
                 <h2 className="statistic__title">Statistic</h2>
                 <p className="statistic__desc">All your attempts will be added to your statistic :)</p>
                 <table className="statistic__table">
+                    <thead>
                     <tr>
                         <th>Game</th>
                         <th>Score</th>
                         <th>Date</th>
                         <th>Time</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {statisticItems}
+                    </tbody>
                 </table>
             </section>
         );

@@ -67,6 +67,7 @@ export default class App extends Component {
         this.createCardItem('sunflower', 'images/plants/sunflower.png'),
         this.createCardItem('sunflower', 'images/plants/sunflower.png')
     ];
+    localStatisticData = (localStorage.getItem('myStatistic')) ? JSON.parse(localStorage.getItem('myStatistic')) : [];
 
     state = {
         topic: 'animals',
@@ -74,7 +75,7 @@ export default class App extends Component {
         color: 'blue',
         colorCode: '#9DD6FA',
         cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
-        statisticData: [],
+        statisticData: this.localStatisticData,
         count: 0,
         gameState: {
             score: 0
