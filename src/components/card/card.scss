@@ -36,11 +36,10 @@
 .front {
   z-index: 2;
   background-color: $light-blue;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
   transition-duration: 350ms;
   filter: saturate(100%);
+  background-image: url("./images/absurdity.png");
+  background-repeat: repeat;
 
   &:hover {
     filter: saturate(140%);
