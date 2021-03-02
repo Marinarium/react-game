@@ -6,6 +6,10 @@ export default class Card extends Component {
 
     render() {
         const {style, onCountClick, onSelectCard, selected, match, color} = this.props;
+        // const audioClickOnCard = new Audio('audio/pew.mp3');
+        // const start = () => {
+        //     audioClickOnCard.play();
+        // }
 
         let classNames = 'card';
         if (selected) {

@@ -24,7 +24,7 @@
 .status__title {
   @include font-style(500, 20px);
   line-height: 1.25;
-  color: $dark;
+  color: $dark-blue;
   margin-right: 8px;
   display: inline-block;
 }
@@ -35,7 +35,7 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 1.2;
-  color: $dark;
+  color: $dark-blue;
 }
 
 .game-box {

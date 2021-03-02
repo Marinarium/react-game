@@ -27,7 +27,7 @@ export default class Statistic extends Component {
         return (
             <section className="statistic">
                 <h2 className="statistic__title">Statistic</h2>
-                <p className="statistic__desc">The best ten attempts will be added to your statistic :)</p>
+                <p className="statistic__desc">The best ten attempts will be saved in your statistic and after reload:)</p>
                 <table className="statistic__table">
                     <thead>
                     <tr>

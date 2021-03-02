@@ -13,7 +13,6 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 
 export default class App extends Component {
     someId = 100;
-    statisticId = 0;
 
     animalsCardsData = [
         this.createCardItem('beaver', 'images/animals/beaver.png'),
@@ -69,6 +68,9 @@ export default class App extends Component {
     ];
     localStatisticData = (localStorage.getItem('myStatistic')) ? JSON.parse(localStorage.getItem('myStatistic')) : [];
 
+    musicBackground = new Audio('audio/get-lucky.mp3');
+    audioClickOnCard = new Audio('audio/pew.mp3');
+
     state = {
         topic: 'animals',
         level: 'easy',
@@ -76,6 +78,8 @@ export default class App extends Component {
         colorCode: '#9DD6FA',
         cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
         statisticData: this.localStatisticData.sort(this.sortByFieldFromBiggest('score')).slice(0, 10),
+        music: 'off',
+        sounds: 'on',
         count: 0,
         gameState: {
             score: 0
@@ -135,6 +139,21 @@ export default class App extends Component {
         this.setState({colorCode});
     };
 
+    onMusicChange = (music) => {
+        this.setState({music});
+        if (music === 'on') {
+            // this.musicBackground.pause();
+            this.musicBackground.loop = true;
+            this.musicBackground.play();
+        } else {
+            this.musicBackground.pause();
+        }
+    }
+
+    onSoundsChange = (sounds) => {
+        this.setState({sounds});
+    }
+
     onFinishGame = () => {
         this.setState(({cardsData}) => {
             return {
@@ -180,6 +199,7 @@ export default class App extends Component {
                 currentDate: currentDate,
                 currentTime: currentTime
             }
+
             this.setState(({statisticData}) => {
                 const newStatsArr = [
                     ...statisticData,
@@ -312,7 +332,14 @@ export default class App extends Component {
                                 addStatisticItem={this.addStatisticItem}
                             />}
                         />
-                        <Route path="/settings" component={Settings}/>
+                        <Route path="/settings"
+                               render={(props) => <Settings
+                                   music={this.state.music}
+                                   sounds={this.state.sounds}
+                                   onMusicChange={this.onMusicChange}
+                                   onSoundsChange={this.onSoundsChange}
+                               />}
+                        />
                         <Route path="/statistic"
                                render={(props) => <Statistic
                                    gameState={this.state.gameState}

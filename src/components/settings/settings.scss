@@ -23,7 +23,7 @@
   margin-bottom: 15px;
 }
 
-.settings__option {
+.settings__options {
   @include font-style(500, 14px);
   line-height: 1.25;
   letter-spacing: 0.005em;
@@ -35,5 +35,31 @@
 
   span.active {
     color: $light-blue;
+  }
+}
+
+.settings__option {
+  cursor: pointer;
+  @include font-style(normal, 14px);
+  color: $grey;
+  font-weight: 500;
+  border: 1px solid $grey;
+  border-radius: 3px;
+  background-color: $light;
+  margin-right: 6px;
+  min-width: 80px;
+  padding: 5px;
+  box-sizing: border-box;
+  transition-duration: 300ms;
+  &.active,
+  &:focus {
+    outline: none;
+    color: $light-blue;
+    border: 1px solid $light-blue;
+    font-weight: 500;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
   }
 }
