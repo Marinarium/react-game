@@ -13,6 +13,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 
 export default class App extends Component {
     someId = 100;
+    statisticId = 0;
 
     animalsCardsData = [
         this.createCardItem('beaver', 'images/animals/beaver.png'),
@@ -73,6 +74,7 @@ export default class App extends Component {
         color: 'blue',
         colorCode: '#9DD6FA',
         cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
+        statisticData: [],
         count: 0,
         gameState: {
             score: 0
@@ -138,6 +140,7 @@ export default class App extends Component {
                 cardsData: []
             };
         });
+        this.setState({gameState: {...this.state.gameState, score: 0}});
         this.zeroOutCount();
     };
 
@@ -164,7 +167,30 @@ export default class App extends Component {
                 };
             }
         });
-        this.setState({ gameState: { ...this.state.gameState, score: 0 } })
+        this.setState({gameState: {...this.state.gameState, score: 0}});
+    };
+
+    addStatisticItem = (newScore) => {
+        if (newScore > 0) {
+            const currentDate = new Date().toLocaleDateString();
+            const currentTime = new Date().toLocaleTimeString();
+            const newStatisticItem = {
+                id: ++this.statisticId,
+                score: newScore,
+                currentDate: currentDate,
+                currentTime: currentTime
+            }
+            this.setState(({statisticData}) => {
+                const newStatsArr = [
+                    ...statisticData,
+                    newStatisticItem
+                ];
+
+                return {
+                    statisticData: newStatsArr
+                };
+            });
+        }
     };
 
     createCardItem(name, img) {
@@ -249,7 +275,6 @@ export default class App extends Component {
     };
 
     render() {
-
         return (
             <Router>
                 <div className='main-wrapper'>
@@ -264,6 +289,8 @@ export default class App extends Component {
                                    onLevelChange={this.onLevelChange}
                                    onColorChange={this.onColorChange}
                                    onNewGame={this.onNewGame}
+                                   gameState={this.state.gameState}
+                                   addStatisticItem={this.addStatisticItem}
                                />}
                         />
                         <Route
@@ -276,10 +303,16 @@ export default class App extends Component {
                                 onSelectCard={this.onSelectCard}
                                 onFinishGame={this.onFinishGame}
                                 onNewGame={this.onNewGame}
+                                addStatisticItem={this.addStatisticItem}
                             />}
                         />
                         <Route path="/settings" component={Settings}/>
-                        <Route path="/statistic" component={Statistic}/>
+                        <Route path="/statistic"
+                               render={(props) => <Statistic
+                                   gameState={this.state.gameState}
+                                   statisticData={this.state.statisticData}
+                               />}
+                        />
                     </main>
                     <Footer/>
                 </div>

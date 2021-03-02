@@ -5,20 +5,8 @@ import './game.scss';
 
 export default class Game extends Component {
 
-    state = {
-        finishStatus: false,
-    }
-
-    finishCurrentGame = () => {
-        this.setState((state) => {
-            return {
-                finishStatus: true
-            };
-        });
-    }
-
     render() {
-        const {cards, onCountClick, onSelectCard, gameState, color, onFinishGame, onNewGame} = this.props;
+        const {cards, onCountClick, onSelectCard, gameState, color, onFinishGame, onNewGame, addStatisticItem} = this.props;
 
         const firstGuessElem = cards.filter((el) => el.firstGuess);
         const secondGuessElem = cards.filter((el) => el.secondGuess);
@@ -43,8 +31,8 @@ export default class Game extends Component {
         }
 
         let finishGame = '';
-        if (cards.every((el) => el.match) || this.state.finishStatus) {
-            finishGame = `Thanks for the game! Your score is ${gameState.score}`;
+        if (cards.every((el) => el.match)) {
+            finishGame = `Thanks for the game!`;
         }
 
         const allCards = cards.map((item) => {
@@ -75,12 +63,20 @@ export default class Game extends Component {
                     <button
                         className="button button__new-game"
                         type="button"
-                        onClick={() => onNewGame()}>New Game
+                        onClick={(e) => {
+                            onNewGame();
+                            addStatisticItem(gameState.score);
+                        }}
+                    >New Game
                     </button>
                     <button
                         className="button button__finish"
                         type="button"
-                        onClick={() => onFinishGame()}>Finish
+                        onClick={(e) => {
+                            onFinishGame();
+                            addStatisticItem(gameState.score);
+                        }}
+                    >Finish
                     </button>
                 </div>
             </section>

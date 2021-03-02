@@ -25,7 +25,7 @@ export default class GameDescription extends Component {
 
     render() {
 
-        const {topic, onTopicChange, level, onLevelChange, color, onColorChange, onNewGame} = this.props;
+        const {topic, onTopicChange, level, onLevelChange, color, onColorChange, onNewGame, addStatisticItem, gameState} = this.props;
 
         const topics = this.topics.map(({name, label}) => {
 
@@ -103,7 +103,10 @@ export default class GameDescription extends Component {
                         </div>
                         <Link to="/game"
                               className="button config__btn-start"
-                              onClick={() => onNewGame()}
+                              onClick={(e) => {
+                                  onNewGame();
+                                  addStatisticItem(gameState.score);
+                              }}
                         >Start</Link>
                     </section>
                 </div>

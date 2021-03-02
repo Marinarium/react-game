@@ -11,7 +11,7 @@ export default class Header extends Component {
     };
 
     menuItems = [
-        {name: 'Game', linkTo: '/'},
+        {name: 'Home', linkTo: '/'},
         {name: 'Settings', linkTo: '/settings'},
         {name: 'Statistic', linkTo: '/statistic'}
     ];

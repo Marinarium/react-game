@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: $light-blue;
-  padding: 10px 5% 11px;
+  padding: 20px 5% 21px;
   margin-bottom: 70px;
   box-shadow: $grey-shadow;
   position: relative;
@@ -114,7 +114,7 @@
 .menu__list {
   //display: none;
   @include visually-hidden;
-  top: 70px;
+  top: 90px;
   right: -100vw;
   background-color: $dark-blue;
   transition-property: right;
@@ -124,7 +124,7 @@
     @include remove-visually-hidden;
     position: absolute;
     width: 40%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 90px);
     text-align: center;
     box-sizing: border-box;
     padding-top: 50px;
