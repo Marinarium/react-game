@@ -71,6 +71,8 @@ export default class App extends Component {
 
     musicBackground = new Audio('audio/get-lucky.mp3');
     soundPew = new Audio('audio/pew.mp3');
+    soundMagic = new Audio('audio/magic-wand.mp3');
+    soundDoorBell = new Audio('audio/doorbell.mp3');
 
     state = {
         topic: 'animals',
@@ -86,6 +88,10 @@ export default class App extends Component {
             score: 0
         }
     }
+
+    handlers = {
+        homePage: event => console.log('press key!!!')
+    };
 
     onTopicChange = (topic) => {
         this.setState({topic});
@@ -161,6 +167,18 @@ export default class App extends Component {
         }
     };
 
+    onSoundClickNewGame() {
+        if (this.state.sounds === 'on') {
+            this.soundMagic.play();
+        }
+    };
+
+    onSoundClickFinishGame() {
+        if (this.state.sounds === 'on') {
+            this.soundDoorBell.play();
+        }
+    };
+
     onFinishGame = () => {
         this.setState(({cardsData}) => {
             return {
@@ -168,6 +186,7 @@ export default class App extends Component {
             };
         });
         this.setState({gameState: {...this.state.gameState, score: 0}});
+        this.onSoundClickFinishGame();
         this.zeroOutCount();
     };
 
@@ -195,6 +214,7 @@ export default class App extends Component {
             }
         });
         this.setState({gameState: {...this.state.gameState, score: 0}});
+        this.onSoundClickNewGame();
     };
 
     addStatisticItem = (newScore) => {
@@ -348,7 +368,7 @@ export default class App extends Component {
                                    statisticData={this.state.statisticData}
                                />}
                         />
-                        <Route path="/hotkeys" component={Hotkeys} />
+                        <Route path="/hotkeys" component={Hotkeys}/>
                     </main>
                     <Footer/>
                 </div>

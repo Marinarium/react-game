@@ -50,6 +50,7 @@ export default class GameDescription extends Component {
                 <button type='button'
                         className={`config__option ${clazz}`}
                         key={name}
+                        onKeyUp={this.onKeyPressed}
                         onClick={() => onLevelChange(name)}>
                     {label}</button>
             );
@@ -91,6 +92,7 @@ export default class GameDescription extends Component {
                             <div className="config__row">
                                 <h4 className="config__subtitle">Topic:</h4>
                                 <div className="config__options">
+
                                     {topics}
                                 </div>
                             </div>
