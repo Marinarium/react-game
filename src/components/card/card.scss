@@ -1,0 +1,74 @@
+@import '../../assets/styles/main.scss';
+.card {
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all .4s linear;
+  transform-style: preserve-3d;
+  margin: 5px;
+  height: 100px;
+  width: 100px;
+
+  @media (max-width: 735px) {
+    height: 70px;
+    width: 70px;
+  }
+
+  @media (max-width: 360px) {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.back,
+.front {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.back,
+.front {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
+  z-index: 2;
+  background-color: $light-blue;
+  transition-duration: 350ms;
+  filter: saturate(100%);
+  background-image: url("./images/absurdity.png");
+  background-repeat: repeat;
+
+  &:hover {
+    filter: saturate(150%);
+  }
+}
+
+.back {
+  transform: rotateY(180deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition-duration: 400ms;
+}
+
+.selected {
+  transform: rotateY(180deg);
+  cursor: auto;
+}
+
+.match {
+  .back {
+    transform: scale(0.5);
+  }
+}
+
+.finish-title {
+  @include font-style(bold, 30px);
+  color: $dark-blue;
+  text-align: center;
+  margin: auto;
+  width: 90%;
+}

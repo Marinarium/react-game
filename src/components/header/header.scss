@@ -1,0 +1,158 @@
+@import '../../assets/styles/main.scss';
+
+.header {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $light-blue;
+  padding: 20px 5% 21px;
+  margin-bottom: 70px;
+  box-shadow: $grey-shadow;
+  position: relative;
+  z-index: 5;
+  background-image: url("./images/absurdity.png");
+  background-repeat: repeat;
+
+  @media (min-width: 1600px) {
+    padding-left: 18%;
+    padding-right: 18%;
+  }
+}
+
+.logo__link {
+  font-family: 'Pacifico', cursive;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 1.75;
+  color: $light;
+  text-shadow: $grey-shadow;
+  text-decoration: none;
+}
+
+.burger {
+  position: relative;
+  width: 35px;
+  height: 28px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+  height: 3px;
+  background-color: $light;
+  box-shadow: 0 1px 2px rgba(0, 73, 142, 0.2);
+
+  &:nth-child(1) {
+    top: 0;
+
+    .menu-show & {
+      top: 12px;
+      width: 0;
+      left: 50%;
+    }
+  }
+
+  &:nth-child(2) {
+    top: 12px;
+
+    .menu-show & {
+      transform: rotate(45deg);
+    }
+  }
+
+  &:nth-child(3) {
+    top: 12px;
+
+    .menu-show & {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:nth-child(4) {
+    top: 25px;
+
+    .menu-show & {
+      top: 10px;
+      width: 0;
+      left: 50%;
+    }
+  }
+}
+
+.burger.active{
+
+  & span:nth-child(1) {
+    top: 12px;
+    width: 0;
+    left: 50%;
+  }
+
+  & span:nth-child(2) {
+    transform: rotate(45deg);
+  }
+
+  & span:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  & span:nth-child(4) {
+    top: 12px;
+    width: 0;
+    left: 50%;
+  }
+}
+
+.menu__list {
+  @include visually-hidden;
+  top: 90px;
+  right: -100vw;
+  background-color: $dark-blue;
+  transition-property: right;
+  transition-duration: 300ms;
+  background-image: url("./images/absurdity.png");
+  background-repeat: repeat;
+
+  &.active {
+    @include remove-visually-hidden;
+    position: absolute;
+    width: 40%;
+    height: calc(100vh - 90px);
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    overflow: auto;
+    right: 0;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+.menu__item {
+  margin-bottom: 40px;
+}
+
+.menu__link {
+  @include font-style(normal, 20px);
+  line-height: 1.25;
+  letter-spacing: 0.005em;
+  color: $light;
+  text-decoration: none;
+  transition-duration: 300ms;
+
+  &:hover {
+    letter-spacing: 0.05em;
+    color: $light-blue;
+  }
+}

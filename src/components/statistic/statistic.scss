@@ -1,0 +1,102 @@
+@import '../../assets/styles/main.scss';
+
+.statistic {
+  box-sizing: border-box;
+  padding: 0 5%;
+
+  @media (min-width: 1600px) {
+    padding-left: 18%;
+    padding-right: 18%;
+  }
+}
+
+.statistic__title {
+  @include main-title();
+}
+
+.statistic__desc {
+  @include font-style();
+  line-height: 1.75;
+  color: $dark-blue;
+  margin-bottom: 25px;
+}
+
+.statistic__table {
+  margin-bottom: 60px;
+  @include font-style(normal, 14px);
+  line-height: 1.2;
+  letter-spacing: 0.015em;
+  color: $dark-blue;
+  text-align: left;
+  border-left: 1px solid $grey;
+  border-right: 1px solid $grey;
+
+  th {
+    padding-bottom: 20px;
+    padding-right: 70px;
+    padding-top: 20px;
+    background-color: $light-blue;
+    color: $dark;
+
+    @media (max-width: 670px) {
+      padding-right: 25px;
+    }
+
+    @media (max-width: 400px) {
+      padding-right: 10px;
+      text-align: center;
+    }
+  }
+
+  tr td {
+    padding-top: 10px;
+    padding-bottom: 13px;
+    padding-right: 90px;
+    color: $dark;
+    padding-left: 5px;
+
+    @media (max-width: 670px) {
+      padding-right: 25px;
+    }
+
+    @media (max-width: 400px) {
+      padding-right: 13px;
+    }
+  }
+
+  tr td:first-child,
+  tr th:first-child {
+    padding-left: 25px;
+
+    @media (max-width: 400px) {
+      padding-left: 5px;
+    }
+  }
+
+  tr td:first-child {
+    @media (max-width: 400px) {
+      padding-left: 10px;
+    }
+  }
+
+  tr:nth-child(2n) {
+    background-color: $grey;
+  }
+
+  tr:nth-child(2n) td {
+    color: $light;
+  }
+
+  th {
+    font-weight: bold;
+    font-size: 18px;
+
+    @media (max-width: 670px) {
+      font-size: 14px;
+    }
+  }
+
+  tr:nth-child(2n+1) {
+    border-bottom: 1px solid $grey;
+  }
+}

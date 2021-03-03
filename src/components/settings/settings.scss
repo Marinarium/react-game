@@ -1,0 +1,65 @@
+@import '../../assets/styles/main.scss';
+
+.settings {
+  box-sizing: border-box;
+  padding: 0 5%;
+
+  @media (min-width: 1600px) {
+    padding-left: 18%;
+    padding-right: 18%;
+  }
+}
+
+.settings__title {
+  @include main-title();
+}
+
+.settings__subtitle {
+  @include font-style(500, 18px);
+  line-height: 1.25;
+  letter-spacing: 0.005em;
+  text-transform: capitalize;
+  color: $dark;
+  margin-bottom: 15px;
+}
+
+.settings__options {
+  @include font-style(500, 14px);
+  line-height: 1.25;
+  letter-spacing: 0.005em;
+  text-transform: capitalize;
+  color: $grey;
+  margin-bottom: 20px;
+  transition-duration: 250ms;
+  cursor: pointer;
+
+  span.active {
+    color: $light-blue;
+  }
+}
+
+.settings__option {
+  cursor: pointer;
+  @include font-style(normal, 14px);
+  color: $grey;
+  font-weight: 500;
+  border: 1px solid $grey;
+  border-radius: 3px;
+  background-color: $light;
+  margin-right: 6px;
+  min-width: 80px;
+  padding: 5px;
+  box-sizing: border-box;
+  transition-duration: 300ms;
+  &.active,
+  &:focus {
+    outline: none;
+    color: $light-blue;
+    border: 1px solid $light-blue;
+    font-weight: 500;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}

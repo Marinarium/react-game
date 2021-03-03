@@ -1,0 +1,16 @@
+body.overflow-hidden{
+  overflow: hidden;
+}
+
+.main-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $light;
+  overflow: hidden;
+}
+
+.main {
+  flex-grow: 1;
+  padding-bottom: 60px;
+}

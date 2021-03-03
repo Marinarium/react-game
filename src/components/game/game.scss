@@ -1,0 +1,75 @@
+@import '../../assets/styles/main.scss';
+.game {
+  box-sizing: border-box;
+  padding: 0 5%;
+
+  @media (min-width: 1600px) {
+    padding-left: 18%;
+    padding-right: 18%;
+  }
+}
+
+.status {
+  margin-bottom: 25px;
+}
+
+.status__row {
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.status__title {
+  @include font-style(500, 20px);
+  line-height: 1.25;
+  color: $dark-blue;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.status__state {
+  font-family: 'Roboto Mono', monospace;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.2;
+  color: $dark-blue;
+}
+
+.game-box {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  position: relative;
+
+  @media (max-width: 735px) {
+    max-width: 500px;
+  }
+
+  @media (max-width: 555px) {
+    max-width: 350px;
+  }
+
+  @media (max-width: 360px) {
+    max-width: 290px;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button__new-game {
+  @include button_light;
+  margin-right: 20px;
+}
+
+.button__finish {
+  @include button;
+}
+

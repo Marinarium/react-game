@@ -1,0 +1,49 @@
+@import '../../assets/styles/main.scss';
+
+.footer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $dark-blue;
+  padding: 14px 5% 6px;
+  background-image: url("./images/absurdity.png");
+  background-repeat: repeat;
+
+  @media (min-width: 1600px) {
+    padding-left: 18%;
+    padding-right: 18%;
+  }
+}
+
+.socials {
+  margin-bottom: 10px;
+}
+
+.socials__link {
+  margin-right: 10px;
+  display: inline-block;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .socials__img {
+    transition-duration: 250ms;
+  }
+
+  &:hover .socials__img{
+    transform: translateY(-3px);
+  }
+}
+
+.rss-logo{
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.year {
+  @include font-style(bold, 11px);
+  line-height: 1.2;
+  color: #F9F9F9;
+}
