@@ -6,10 +6,10 @@ import './hotkeys.scss';
 export default class Hotkeys extends Component {
     hotKeys = [
         {label: 'Home', key:'alt+h'},
+        {label: 'Game', key:'alt+g'},
         {label: 'Settings', key:'alt+s'},
         {label: 'Statistic', key:'alt+t'},
-        {label: 'Hotkeys', key:'alt+k'},
-        {label: 'GitHub', key:'alt+g'}
+        {label: 'Hotkeys', key:'alt+k'}
     ]
 
     render() {

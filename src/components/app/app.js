@@ -179,6 +179,8 @@ export default class App extends Component {
         }
     };
 
+
+
     onFinishGame = () => {
         this.setState(({cardsData}) => {
             return {
