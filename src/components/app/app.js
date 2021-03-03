@@ -79,7 +79,7 @@ export default class App extends Component {
         cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random()),
         statisticData: this.localStatisticData.sort(this.sortByFieldFromBiggest('score')).slice(0, 10),
         music: 'off',
-        sounds: 'on',
+        sounds: 'off',
         count: 0,
         gameState: {
             score: 0
