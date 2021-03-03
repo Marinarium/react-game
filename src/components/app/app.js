@@ -70,9 +70,6 @@ export default class App extends Component {
     localStatisticData = (localStorage.getItem('myStatistic')) ? JSON.parse(localStorage.getItem('myStatistic')) : [];
 
     musicBackground = new Audio('audio/get-lucky.mp3');
-    soundPew = new Audio('audio/pew.mp3');
-    soundMagic = new Audio('audio/magic-wand.mp3');
-    soundDoorBell = new Audio('audio/doorbell.mp3');
 
     state = {
         topic: 'animals',
@@ -89,160 +86,7 @@ export default class App extends Component {
         }
     }
 
-    handlers = {
-        homePage: event => console.log('press key!!!')
-    };
-
-    onTopicChange = (topic) => {
-        this.setState({topic});
-        this.setState(({cardsData}) => {
-            if (topic === 'plants' && this.state.level === 'pro') {
-                return {
-                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
-                };
-            } else if (topic === 'animals' && this.state.level === 'pro') {
-                return {
-                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
-                };
-            } else if (topic === 'plants' && this.state.level === 'easy') {
-                return {
-                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
-                };
-            } else {
-                return {
-                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
-                };
-            }
-        });
-        this.zeroOutCount();
-    };
-
-    onLevelChange = (level) => {
-        this.setState({level});
-        this.setState(({cardsData}) => {
-            if (level === 'easy' && this.state.topic === 'animals') {
-                return {
-                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
-                };
-            } else if (level === 'pro' && this.state.topic === 'animals') {
-                return {
-                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
-                };
-            } else if (level === 'easy' && this.state.topic === 'plants') {
-                return {
-                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
-                };
-            } else {
-                return {
-                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
-                };
-            }
-        });
-        this.zeroOutCount();
-    };
-
-    onColorChange = (color, colorCode) => {
-        this.setState({color});
-        this.setState({colorCode});
-    };
-
-    onMusicChange = (music) => {
-        this.setState({music});
-        if (music === 'on') {
-            // this.musicBackground.pause();
-            this.musicBackground.loop = true;
-            this.musicBackground.play();
-        } else {
-            this.musicBackground.pause();
-        }
-    }
-
-    onSoundsChange = (sounds) => {
-        this.setState({sounds});
-    }
-
-    onSoundClick() {
-        if (this.state.sounds === 'on') {
-            this.soundPew.play();
-        }
-    };
-
-    onSoundClickNewGame() {
-        if (this.state.sounds === 'on') {
-            this.soundMagic.play();
-        }
-    };
-
-    onSoundClickFinishGame() {
-        if (this.state.sounds === 'on') {
-            this.soundDoorBell.play();
-        }
-    };
-
-
-
-    onFinishGame = () => {
-        this.setState(({cardsData}) => {
-            return {
-                cardsData: []
-            };
-        });
-        this.setState({gameState: {...this.state.gameState, score: 0}});
-        this.onSoundClickFinishGame();
-        this.zeroOutCount();
-    };
-
-    onNewGame = () => {
-        this.setState((state) => {
-            return {count: 0}
-        });
-        this.setState(({cardsData}) => {
-            if (this.state.topic === 'plants' && this.state.level === 'pro') {
-                return {
-                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
-                };
-            } else if (this.state.topic === 'animals' && this.state.level === 'pro') {
-                return {
-                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
-                };
-            } else if (this.state.topic === 'plants' && this.state.level === 'easy') {
-                return {
-                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
-                };
-            } else {
-                return {
-                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
-                };
-            }
-        });
-        this.setState({gameState: {...this.state.gameState, score: 0}});
-        this.onSoundClickNewGame();
-    };
-
-    addStatisticItem = (newScore) => {
-        if (newScore > 0) {
-            const currentDate = new Date().toLocaleDateString();
-            const currentTime = new Date().toLocaleTimeString();
-            const newStatisticItem = {
-                score: newScore,
-                currentDate: currentDate,
-                currentTime: currentTime
-            }
-
-            this.setState(({statisticData}) => {
-                const newStatsArr = [
-                    ...statisticData,
-                    newStatisticItem
-                ];
-
-                newStatsArr.sort(this.sortByFieldFromBiggest('score')).slice(0, 10);
-
-                return {
-                    statisticData: newStatsArr
-                };
-            });
-        }
-    };
+    //Build game process
 
     createCardItem(name, img) {
         return {
@@ -294,7 +138,7 @@ export default class App extends Component {
         if (this.state.count < 2) {
             if (this.state.count === 0) {
                 this.incrementCount();
-                this.onSoundClick();
+                this.playSound('audio/pew.mp3');
                 this.setState(({cardsData}) => {
                     return {
                         cardsData: this.changeProperty(cardsData, id, 'selected', true)
@@ -308,7 +152,7 @@ export default class App extends Component {
             }
             if (this.state.count === 1 && !firstGuess) {
                 this.incrementCount();
-                this.onSoundClick();
+                this.playSound('audio/pew.mp3');
                 this.setState(({cardsData}) => {
                     return {
                         cardsData: this.changeProperty(cardsData, id, 'selected', true)
@@ -322,6 +166,164 @@ export default class App extends Component {
                     }), 1200);
                 this.zeroOutCount();
             }
+        }
+    };
+
+    onFinishGame = () => {
+        this.setState(({cardsData}) => {
+            return {
+                cardsData: []
+            };
+        });
+        this.setState({gameState: {...this.state.gameState, score: 0}});
+        this.playSound('audio/doorbell.mp3');
+        this.zeroOutCount();
+    };
+
+    onNewGame = () => {
+        this.setState((state) => {
+            return {count: 0}
+        });
+        this.setState(({cardsData}) => {
+            if (this.state.topic === 'plants' && this.state.level === 'pro') {
+                return {
+                    cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
+                };
+            } else if (this.state.topic === 'animals' && this.state.level === 'pro') {
+                return {
+                    cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
+                };
+            } else if (this.state.topic === 'plants' && this.state.level === 'easy') {
+                return {
+                    cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                };
+            } else {
+                return {
+                    cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                };
+            }
+        });
+        this.setState({gameState: {...this.state.gameState, score: 0}});
+        this.playSound('audio/magic-wand.mp3');
+    };
+
+    // Game config
+
+    onTopicChange = (topic) => {
+        this.setState({topic});
+        this.setState(({cardsData}) => {
+
+            if (topic === 'plants') {
+                if (this.state.level === 'pro') {
+                    return {
+                        cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
+                    };
+                }else {
+                    return {
+                        cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                    };
+                }
+            }
+
+            if (topic === 'animals') {
+                if (this.state.level === 'pro') {
+                    return {
+                        cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
+                    };
+                }else {
+                    return {
+                        cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                    };
+                }
+            }
+
+        });
+        this.zeroOutCount();
+    };
+
+    onLevelChange = (level) => {
+        this.setState({level});
+        this.setState(({cardsData}) => {
+
+            if (level === 'easy') {
+                if (this.state.topic === 'plants') {
+                    return {
+                        cardsData: this.plantsCardsData.sort(() => 0.5 - Math.random())
+                    };
+                }else {
+                    return {
+                        cardsData: this.animalsCardsData.sort(() => 0.5 - Math.random())
+                    };
+                }
+            }
+
+            if (level === 'animals') {
+                if (this.state.topic === 'plants') {
+                    return {
+                        cardsData: this.plantsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                    };
+                }else {
+                    return {
+                        cardsData: this.animalsCardsData.sort(this.sortByField('name')).slice(0, 12).sort(() => 0.5 - Math.random())
+                    };
+                }
+            }
+
+        });
+        this.zeroOutCount();
+    };
+
+    onColorChange = (color, colorCode) => {
+        this.setState({color});
+        this.setState({colorCode});
+    };
+
+    // Settings
+
+    onMusicChange = (music) => {
+        this.setState({music});
+        if (music === 'on') {
+            this.musicBackground.loop = true;
+            this.musicBackground.play();
+        } else {
+            this.musicBackground.pause();
+        }
+    }
+
+    onSoundsChange = (sounds) => {
+        this.setState({sounds});
+    }
+
+    playSound(src) {
+        if (this.state.sounds === 'on') {
+            new Audio(src).play();
+        }
+    }
+
+    // Build statistic
+
+    addStatisticItem = (newScore) => {
+        if (newScore > 0) {
+            const currentDate = new Date().toLocaleDateString();
+            const currentTime = new Date().toLocaleTimeString();
+            const newStatisticItem = {
+                score: newScore,
+                currentDate: currentDate,
+                currentTime: currentTime
+            }
+
+            this.setState(({statisticData}) => {
+                const newStatsArr = [
+                    ...statisticData,
+                    newStatisticItem
+                ];
+
+                newStatsArr.sort(this.sortByFieldFromBiggest('score')).slice(0, 10);
+
+                return {
+                    statisticData: newStatsArr
+                };
+            });
         }
     };
 

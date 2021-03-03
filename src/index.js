@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import App from "./components/app/app";
 
 document.addEventListener('keydown', function (event) {
-
     if (event.key === 's' && event.altKey) {
         window.location = '/settings';
     }

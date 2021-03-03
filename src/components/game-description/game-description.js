@@ -92,7 +92,6 @@ export default class GameDescription extends Component {
                             <div className="config__row">
                                 <h4 className="config__subtitle">Topic:</h4>
                                 <div className="config__options">
-
                                     {topics}
                                 </div>
                             </div>
