@@ -13,7 +13,7 @@ export default class Footer extends Component {
                     <a href="https://github.com/Marinarium" className="socials__link">
                         <img src={git} alt="github" className="socials__img"/>
                     </a>
-                    <a href="https://www.youtube.com/" className="socials__link">
+                    <a href="https://youtu.be/T3cVwtnJIwI" className="socials__link">
                         <img src={youtube} alt="youtube" className="socials__img"/>
                     </a>
                 </section>
